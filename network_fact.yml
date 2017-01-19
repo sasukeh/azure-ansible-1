@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Get facts for one virtual network
+      azure_rm_virtualnetwork_facts:
