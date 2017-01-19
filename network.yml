@@ -4,26 +4,32 @@
   tasks:
   - name: Create virtual network
     azure_rm_virtualnetwork:
-      resource_group: azure-test1
+      resource_group: azure-test-1
       name: testvn001
       address_prefixes: "10.10.0.0/16"
 
   - name: Add subnet
     azure_rm_subnet:
-      resource_group: azure-test1
+      resource_group: azure-test-1
       name: subnet001
       address_prefix: "10.10.0.0/24"
       virtual_network: testvn001
 
   - name: Create public ip
     azure_rm_publicipaddress:
-      resource_group: azure-test1
+      resource_group: azure-test-1
       allocation_method: Dynamic
       name: publicip001
 
+  - name: Create public ip
+    azure_rm_publicipaddress:
+      resource_group: azure-test-1
+      allocation_method: Dynamic
+      name: publicip002
+
   - name: Create security group that allows SSH
     azure_rm_securitygroup:
-      resource_group: azure-test1
+      resource_group: azure-test-1
       name: secgroup001
       rules:
         - name: SSH
@@ -33,11 +39,20 @@
           priority: 101
           direction: Inbound
 
-  - name: Create NIC
+  - name: Create NIC(1)
     azure_rm_networkinterface:
-      resource_group: azure-test1
+      resource_group: azure-test-1
       name: testnic001
       virtual_network: testvn001
       subnet: subnet001
       public_ip_name: publicip001
+      security_group: secgroup001
+
+  - name: Create NIC(2)
+    azure_rm_networkinterface:
+      resource_group: azure-test-1
+      name: testnic002
+      virtual_network: testvn001
+      subnet: subnet001
+      public_ip_name: publicip002
       security_group: secgroup001

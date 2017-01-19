@@ -8,8 +8,8 @@
       name: testvmcentos1
       virtual_network_name: testvn001
       subnet_name: subnet001
-      network_interface_names: testnic001
-      storage_blob: testvm001.vhd
+      network_interface_names: testnic002
+      storage_blob: testvm002.vhd
       storage_container: testvm001
       vm_size: Standard_D1 
       location: eastus
