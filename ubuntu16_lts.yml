@@ -2,17 +2,37 @@
 - hosts: localhost
   connection: local
   tasks:
+#  - name: Create NIC(1)
+#    register: nic
+#    azure_rm_networkinterface:
+#      resource_group: azure-test-1
+#      name: testnic001
+#      virtual_network: testnetwork
+#      subnet: publicNetwork
+#      public_ip_name: publicip001
+#      security_group: secgroup001
+#  - name: Create public ip
+#    register: public_ip
+#    azure_rm_publicipaddress:
+#      resource_group: azure-test-1
+#      allocation_method: Dynamic
+#      name: publicip001
+#
+#  - debug:
+#      var: nic
+
   - name: Create VM with Ubuntu 
+    register: ls_result  
     azure_rm_virtualmachine:
       resource_group: azure-test-1
       name: testvmubuntu1
-      virtual_network_name: testvn001
-      subnet_name: subnet001
+      virtual_network_name: testnetwork
+      subnet_name: publicNetwork
       network_interface_names: testnic001
-      storage_container: testvm002
+#      storage_container: testvm002
       vm_size: Standard_D1 
       location: eastus
-      storage_account_name: azuretest12345
+#      storage_account_name: azuretest12345
       public_ip_allocation_method: Dynamic
       admin_username: ubuntu
       ssh_password_enabled: False
@@ -24,3 +44,5 @@
         publisher: Canonical
         sku: '16.04.0-LTS'
         version: latest
+  - debug: var=ls_result
+    when: ls_result | success

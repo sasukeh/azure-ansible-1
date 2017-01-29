@@ -1,0 +1,22 @@
+- name: Create VM with CentOS
+  azure_rm_virtualmachine:
+    resource_group: azure-test-1
+    name: testvmcentos1
+    virtual_network_name: "{{ vmname }}"
+    subnet_name: subnet001
+    network_interface_names: "{{ nic_name }}"
+    storage_container: testvm001
+    vm_size: Standard_D1
+    location: eastus
+    storage_account_name: "{{ storage_account_name }}"
+    public_ip_allocation_method: Dynamic
+    admin_username: centos
+    ssh_password_enabled: False
+    ssh_public_keys:
+      - path: "/home/centos/.ssh/authorized_keys"
+        key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwTXfsS4+FRigKOYxWt9NYIQ2nSEA+dRu40d2+gkYEaZEuXpTL1VO+PNHzibC9v6zKwBD2bTyvCGb88/ybB6uKicUKlZhNKZs+tSvyrhgF+15Xh/3K1gS+ZAGszt3xUBHPynM4HcOU/anx32zO+lHCRUDPkbSeRlXzUsUJ0tC0aoye9kQsh96jF9Z2OrTPL42eLmLtK+uVNHwQvrhmuYrRAdlTM1we6Brf0AqeX8t1qNTMF9oURNSAFL5S21V+gYQlXIflUSEoFpHEWy/I9Drt6OREW6alxbuTHTw8LFk0E4yIWuOUXgYsnJt84W0EElyip7LJyzEtdg06NSeVhxSB ubuntu@JPSHTSUKAM001"
+    image:
+      offer: CentOS
+      publisher: OpenLogic
+      sku: '7.3'
+      version: latest

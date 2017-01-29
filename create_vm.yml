@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - include: create_interface_public_ip.yml
+    - include: centos73.yml

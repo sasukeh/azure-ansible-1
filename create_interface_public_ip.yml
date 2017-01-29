@@ -1,0 +1,17 @@
+- name: Create public ip
+  register: public_ip
+  azure_rm_publicipaddress:
+    resource_group: azure-test-1
+    allocation_method: Dynamic
+    name: "{{ public_ip_name }}"
+- name: Create NIC
+  register: nic
+  azure_rm_networkinterface:
+    resource_group: azure-test-1
+    name: "{{ nic_name }}"
+    virtual_network: testnetwork
+    subnet: publicNetwork
+    public_ip_name: "{{ public_ip_name }}"
+    security_group: "{{ security_group_name }}"
+- debug:
+    var: nic

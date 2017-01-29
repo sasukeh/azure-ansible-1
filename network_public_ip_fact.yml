@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Get facts for one virtual network
+      register: network_fact
+      azure_rm_publicipaddress_facts:
+        resource_group: azure-test-1
+        name: publicip001
+    - debug:
+        var: network_fact
+    - debug:
+        var: azure_publicipaddresses[0].properties.ipAddress

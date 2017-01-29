@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Get facts for virtual machines
+      register: vm
+      azure_rm_virtualmachineimage_facts:
+        location: eastus
+    - debug:
+        var: vm
+    - debug:
+        var: azure_vmimages

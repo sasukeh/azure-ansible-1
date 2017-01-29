@@ -4,3 +4,10 @@
   tasks:
     - name: Get facts for one virtual network
       azure_rm_virtualnetwork_facts:
+      register: network_fact
+
+    - debug:
+        var: network_fact
+
+#    - debug:
+#        var: azure_publicipaddresses
